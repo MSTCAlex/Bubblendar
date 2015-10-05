@@ -1,1 +1,5 @@
 # Bubblendar
+Calendars are good for meetings, anniversaries and so on, but bad for everyday tasks and assignment, because you can’t schedule them for long term, so if you want to schedule them you need to do it, the day after doing them; so you need something like a pool to keep them till the day of scheduling, that pool may be a todo list, excel sheet, etc. etc. 
+However, to select a task from excel sheet or todo list, you might use a software that orders them by deadline dates or priorities and you select the candidate task and insert it in your calendar.
+Bubblendar is a software that display your tasks as floating bubbles, the bigger the bubble, the higher the priority, the higher the bubble, the closer the deadline; when you click a bubble a form will be displayed to add task to your calendar, after the end of a task's period on the calendar you can upload any documents related to the task and will be saved in the calendar, so you can retrieve them with the date or the name of the task. 
+It's like calendar, todo list and diary/notebook in one place
