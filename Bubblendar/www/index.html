@@ -11,18 +11,31 @@
     <title>Bubblendar</title>
     <!-- Bubblendar references -->
     <link href="css/index.css" rel="stylesheet" />
+    <script>
+        function onLoad() {
+            document.addEventListener("deviceready", onDeviceReady, true);
+        }
+
+        function onDeviceReady() {
+            // navigator.notification.alert("PhoneGap is working");
+        }
+
+        function callAnothePage() {
+            window.location = "TaskBoard.html";
+        }
+    </script>
 </head>
-<body>
+<body onload="onLoad();">
 
     
     <!-- Cordova reference, this is added to your app when it's built. -->
     <script src="cordova.js"></script>
     <script src="scripts/platformOverrides.js"></script>
     <script src="scripts/index.js"></script>
-    <script src="scripts/Task.js"></script>
+    <button name="buttonClick" onclick="callAnothePage()">Navigate to Taskboard</button>
     <script>
-
-
+        
+       
     </script>
 </body>
 </html>
