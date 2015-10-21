@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <title>Signup</title>
+    <script src="scripts/sessionManager.js"></script>
+    <script>
+        function sendClicked()
+        {
+            if (signup_password.value != signup_confpassword.value)
+            {
+                // TODO: Display warning
+                return;
+            }
+            // TODO: Data validation (Guidelines needed)
+            signup({
+                nickname: signup_dispname.value,
+                username: signup_username.value,
+                password: signup_password.value,
+                email: signup_email.value,
+            })
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <label>Nickname:</label><input type="text" id="signup_dispname" /><br />
+        <label>Username:</label><input type="text" id="signup_username"/><br />
+        <label>Email:</label><input type="email" id="signup_email"/><br />
+        <label>Password:</label><input type="password" id="signup_password"/><br />
+        <label>Confirm Password:</label><input type="password" id="signup_confpassword"/><br />
+        <button onclick="sendClicked()">Send</button>
+    </div>
+</body>
+</html>
