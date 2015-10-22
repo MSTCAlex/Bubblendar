@@ -1,25 +1,27 @@
-﻿
-function Bubble(Content, Scale)
+﻿function Bubble(Content, Scale)
 {
     var ActivatedBubble = new PIXI.Texture.fromImage("scripts/Activated.png");
     var NormalBubble = new PIXI.Texture.fromImage("scripts/Normal.png");
-    this.Sprite = new PIXI.Sprite(NormalBubble);
+    this.Dragging = false;
+    this.Data = null;
+    Sprite = this.Sprite = new PIXI.Sprite(NormalBubble);
     this.Sprite.scale.x = this.Sprite.scale.y = Scale;
-    function style(Sprite) {
+    this.Sprite.anchor.x = this.Sprite.anchor.y = 0.5;
+    function style(ss) {
         this.font = 'bold italic 100px Arial';
         this.fill = '#F7EDCA';
         //this.stroke = '#4a1850';
         //this.strokeThickness = 5;
         this.wordWrap = true;
-        this.wordWrapWidth = Sprite.width;
+        this.wordWrapWidth = ss.width;
         this.align = "center";
     };
     var Text = new PIXI.Text(Content, new style(this.Sprite));
     Text.anchor.x = Text.anchor.y = 0.5;
-    Text.x = this.Sprite.width / 2;
-    Text.y = this.Sprite.height / 2;
+    Text.x = 0;
+    Text.y = 0;
     this.Sprite.addChild(Text);
-    this.Resize = function (Scale) {
+    Resize = function (Scale) {
         this.Sprite.scale.x = this.Sprite.scale.y = Scale;
         this.Sprite.children[0].style = new style(this.Sprite);
     }
@@ -30,14 +32,36 @@ function Bubble(Content, Scale)
     this.ChangeText = function (Text) {
         this.Sprite.children[0].text = Text;
     }
-    this.SetEventHandler = function (Events) {
-        this.Sprite
-        .on('click', Events.Click)
-        .on('mousedown', Events.MouseDown)
-        .on('mouseup', Events.MouseUp)
-        .on('mouseover', Events.MouseHover)
-        .on('mousemove', Events.MouseMove);
+    this.SubscibeToEvent = function (Event,s)
+    {
+        s
+        .on('mousedown', Event.MouseDown)
+        .on('mouseup', Event.MouseUp)
+        .on('mouseupoutside', Event.MouseUp)
+        .on('mousemove', Event.MouseMove);
     }
-    
-        
+}
+
+
+var EventHandler = function () {//all action handling will be here
+    this.Click = function (event) {
+
+    }
+    this.MouseDown = function (event) {
+        this.Data = event.data;
+        this.Dragging = true;
+    }
+    this.MouseUp = function (event) {
+        this.Dragging = false;
+        this.Data = null;
+    }
+    this.MouseMove = function (event) {
+        if (this.Dragging) {
+            
+            this.position = this.Data.getLocalPosition(this.parent);
+        }
+    }
+    this.MouseHover = function (event) {
+
+    }
 }

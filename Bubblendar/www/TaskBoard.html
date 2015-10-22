@@ -10,7 +10,8 @@
     <title>Tasks</title>
 </head>
 <body>
-    <script src="scripts/Manipulation.js"></script>
+    <script src="https://cdn.jsdelivr.net/jsface/2.4.9/jsface.min.js"></script>
+    <script src="scripts/Bubble.js"></script>
     <script src="scripts/pixi.min.js"></script>
     <script>
         // create an new instance of a pixi stage
@@ -28,20 +29,26 @@
         Loader.load();
         function Loaded() {
             //Your program start here :D
-            var b = new Bubble("Mathematics sheet1", 1);
+            var b = new Bubble("Mathematics sheet1", 0.2);
+            var E1 = new EventHandler(b);
+            b.SubscibeToEvent(E1,b.Sprite);
+            var b2 = new Bubble("Database lab4", 0.1);
+            var E2 = new EventHandler(b2);
+            b2.SubscibeToEvent(E2,b2.Sprite);
             stage.addChild(b.Sprite);
-            b.Resize(0.25);
-            b.Move(new PIXI.Point(100, 200));
-        
-        requestAnimationFrame(animate);
-
-        function animate() {
+            stage.addChild(b2.Sprite);
 
             requestAnimationFrame(animate);
 
-            // render the stage   
-            renderer.render(stage);
+            function animate() {
+
+                requestAnimationFrame(animate);
+
+                // render the stage   
+                renderer.render(stage);
+            }
         }
+
     </script>
 </body>
 </html>
