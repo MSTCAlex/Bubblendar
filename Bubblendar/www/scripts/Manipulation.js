@@ -1,5 +1,5 @@
 ﻿
-function bubble(Content, Scale)
+function Bubble(Content, Scale)
 {
     var ActivatedBubble = new PIXI.Texture.fromImage("scripts/Activated.png");
     var NormalBubble = new PIXI.Texture.fromImage("scripts/Normal.png");
@@ -27,29 +27,17 @@ function bubble(Content, Scale)
     this.Move = function (NewPosition) {
         this.Sprite.position = NewPosition;
     }
-    this.Click = function (event) {
-        console.log("click");
-    }
-    this.MouseDown = function (event) {
-        console.log("down");
-    }
-    this.MouseUp = function (event) {
-        console.log("up");
-    }
-    this.MouseMove = function (event) {
-        console.log("move");
-    }
-    this.MouseHover = function (event) {
-        console.log("over");
-    }
     this.ChangeText = function (Text) {
         this.Sprite.children[0].text = Text;
     }
-    this.Sprite
-        .on('click',this.Click)
-        .on('mousedown', this.MouseDown)
-        .on('mouseup',this.MouseUp)
-        .on('mouseover',this.MouseHover)
-        .on('mousemove', this.MouseMove);
+    this.SetEventHandler = function (Events) {
+        this.Sprite
+        .on('click', Events.Click)
+        .on('mousedown', Events.MouseDown)
+        .on('mouseup', Events.MouseUp)
+        .on('mouseover', Events.MouseHover)
+        .on('mousemove', Events.MouseMove);
+    }
+    
         
 }

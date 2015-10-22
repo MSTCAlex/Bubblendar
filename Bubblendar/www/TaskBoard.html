@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+        }
+    </style>
+    <title>Tasks</title>
+</head>
+<body>
+    <script src="scripts/Manipulation.js"></script>
+    <script src="scripts/pixi.min.js"></script>
+    <script>
+        // create an new instance of a pixi stage
+        var stage = new PIXI.Stage();
+
+        // create a renderer instance.
+        var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight -5, { backgroundColor: 0xffffff });
+
+        // add the renderer view element to the DOM
+        document.body.appendChild(renderer.view);
+        //loading assets
+        Loader = new PIXI.loaders.Loader("scripts/", 2);
+        Loader.add("Activated.png", "Normal.png");
+        Loader.once('complete', Loaded);;
+        Loader.load();
+        function Loaded() {
+            //Your program start here :D
+            var b = new Bubble("Mathematics sheet1", 1);
+            stage.addChild(b.Sprite);
+            b.Resize(0.25);
+            b.Move(new PIXI.Point(100, 200));
+        
+        requestAnimationFrame(animate);
+
+        function animate() {
+
+            requestAnimationFrame(animate);
+
+            // render the stage   
+            renderer.render(stage);
+        }
+    </script>
+</body>
+</html>
