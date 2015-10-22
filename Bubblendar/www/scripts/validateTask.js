@@ -1,6 +1,4 @@
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
-	<script type="text/javascript">
+
 	function validateData (title, desc, deadline, filesize)
 	{
 		this._title= title;
@@ -142,4 +140,4 @@
 			alert(test.id + "\n " + test.error);
 		}
 	}*/
-	</script>
+	
