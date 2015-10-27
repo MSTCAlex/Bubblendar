@@ -16,8 +16,25 @@
     <script src="scripts/opTask.js"></script>
     <script src="scripts/backBone.js"></script>
     <script>
+        function onLoad() {
+            startSession(); // Init sessionManager
+        };
         function loginClicked() {            
-            // Login operation code is 1          
+            var lgtask = new opTask(1, 1, lgfinished);
+            lgtask.userinfo = {
+                username: login_username.value,
+                password: login_password.value,                
+            };
+            HandleBaseTask(lgtask);
+            function lgfinished(success) {
+                if (success) {
+
+                }
+                else {
+                    // TODO: Error handling
+                    lgtask.errors;
+                }
+            };
         };
 
         function signupClicked()
@@ -26,7 +43,7 @@
         };
     </script>
 </head>
-<body>   
+<body onload="onLoad()">   
     <div>
         <input type="text" id="login_username"/>
         <input type="password" id="login_password"/>

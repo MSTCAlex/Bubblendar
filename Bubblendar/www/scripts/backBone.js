@@ -2,7 +2,7 @@
     type = optask.btype ? optask.btype : optask.ftype;
     if (type == 0) // Signup request    
         signup(optask.userinfo, onfin);
-    else if (type == 1)
+    else if (type == 1) // Login request
         login(optask.userinfo, onfin);
     ////////////////////////////////////////////////////////////////////////////////
     function onfin(error) {

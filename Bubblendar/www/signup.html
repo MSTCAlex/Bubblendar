@@ -16,6 +16,9 @@
     <script src="scripts/opTask.js"></script>
     <script src="scripts/backBone.js"></script>
     <script>
+        function onLoad() {
+            startSession(); // Init sessionManager
+        };
         function sendClicked() {            
             if (signup_password.value != signup_confpassword.value) {
                 // TODO: Display warning
@@ -42,7 +45,7 @@
         };
     </script>
 </head>
-<body>
+<body onload="onLoad()">
     <div>
         <label>Nickname:</label><input type="text" id="signup_dispname" /><br />
         <label>Username:</label><input type="text" id="signup_username" /><br />
