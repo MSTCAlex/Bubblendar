@@ -1,5 +1,5 @@
 ﻿function Task()
-    {
+{
     this.Title =  "Title";
     this.Description = "Description";
     this.DeadLine = {
@@ -13,4 +13,4 @@
     this.AttachURLs = new Array();
     this.IsDone = false;
     this.DateCreated = null;
-    }
+}

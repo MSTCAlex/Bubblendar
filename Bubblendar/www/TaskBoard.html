@@ -13,31 +13,140 @@
     <script src="https://cdn.jsdelivr.net/jsface/2.4.9/jsface.min.js"></script>
     <script src="scripts/Bubble.js"></script>
     <script src="scripts/pixi.min.js"></script>
+    <script src="scripts/Task.js"></script>
+    <script src="scripts/TaskboardGenerator.js"></script>
     <script>
         // create an new instance of a pixi stage
         var stage = new PIXI.Stage();
-
+        var stage2 = new PIXI.Stage();
         // create a renderer instance.
-        var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight -5, { backgroundColor: 0xffffff });
-
+        var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight/2 - 5, { backgroundColor: 0xffffff, transparent: true });
+        var renderer2 = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight / 2 - 5, { transparent: true });
         // add the renderer view element to the DOM
         document.body.appendChild(renderer.view);
+        document.body.appendChild(document.createElement("br"));
+        document.body.appendChild(renderer2.view);
         //loading assets
         Loader = new PIXI.loaders.Loader("scripts/", 2);
         Loader.add("Activated.png", "Normal.png");
         Loader.once('complete', Loaded);;
         Loader.load();
-        function Loaded() {
+        function Loaded()
+        {
             //Your program start here :D
-            var b = new Bubble("Mathematics sheet1", 0.2);
-            var E1 = new EventHandler(b);
-            b.SubscibeToEvent(E1,b.Sprite);
-            var b2 = new Bubble("Database lab4", 0.1);
-            var E2 = new EventHandler(b2);
-            b2.SubscibeToEvent(E2,b2.Sprite);
-            stage.addChild(b.Sprite);
-            stage.addChild(b2.Sprite);
+            var list = new Array();
+            var t4 = new Task();
+            t4.Title = "Math Sheet";
+            t4.Description = "Sheet on integration";
+            t4.DeadLine = {
+                Year: 2015,
+                Day: 4,
+                Month: 11
+            }
+            t4.IsScheduled = true;
+            t4.Size = 0.7;
+            list.push(t4);
+            var t = new Task();
+            t.Title = "Networks lab";
+            t.Description = "invastigate wireshark";
+            t.DeadLine = {
+                Year: 2015,
+                Day: 3,
+                Month: 11
+            }
+            t.IsScheduled = false;
+            t.Size = 0.9;
+            list.push(t);
+            var t3 = new Task();
+            t3.Title = "Signals Assignment";
+            t3.Description = "digital signal problems";
+            t3.DeadLine = {
+                Year: 2015,
+                Day: 12,
+                Month: 11
+            }
+            t3.IsScheduled = false;
+            t3.Size = 0.2;
+            list.push(t3);
 
+            var t2 = new Task();
+            t2.Title = "Math lab";
+            t2.Description = "Integration on matlab";
+            t2.DeadLine = {
+                Year: 2015,
+                Day: 3,
+                Month: 11
+            }
+            t2.IsScheduled = false;
+            t2.Size = 0.5;
+            list.push(t2);
+
+            var t5 = new Task();
+            t5.Title = "Karakib win2d Design";
+            t5.Description = "Integration on matlab";
+            t5.DeadLine = {
+                Year: 2015,
+                Day: 12,
+                Month: 11
+            }
+            t5.IsScheduled = true;
+            t5.Size = 0.1;
+            list.push(t5);
+
+            var t6 = new Task();
+            t6.Title = "Karakib UWP";
+            t6.Description = "Integration on matlab";
+            t6.DeadLine = {
+                Year: 2015,
+                Day: 30,
+                Month: 12
+            }
+            t6.IsScheduled = true;
+            t6.Size = 0.35;
+            list.push(t6);
+
+            var t7 = new Task();
+            t7.Title = "Bubblendar bootstrap";
+            t7.Description = "Integration on matlab";
+            t7.DeadLine = {
+                Year: 2015,
+                Day: 5,
+                Month: 11
+            }
+            t7.IsScheduled = true;
+            t7.Size = 0.42;
+            list.push(t7);
+
+            var t8 = new Task();
+            t8.Title = "Database Sheet";
+            t8.Description = "Integration on matlab";
+            t8.DeadLine = {
+                Year: 2015,
+                Day: 31,
+                Month: 10
+            }
+            t8.IsScheduled = false;
+            t8.Size = 0.88;
+            list.push(t8);
+            var a = Organize(list);
+            var b = Task2Bubble(a.Today);
+            var c = new LocateBubble(b,renderer2);
+            c.Construct();
+            for (var i = 0; i < b.length; i++)
+            {
+                for (var j = 0; j < b[i].length; j++)
+                {
+                     stage2.addChild(b[i][j].Sprite);
+                }
+            }
+            var b1 = Task2Bubble(a.All);
+            var c1 = new LocateBubble(b1,renderer);
+            c1.Construct();
+            for (var i = 0; i < b1.length; i++) {
+                for (var j = 0; j < b1[i].length; j++) {
+                    stage.addChild(b1[i][j].Sprite);
+                }
+            }
             requestAnimationFrame(animate);
 
             function animate() {
@@ -46,7 +155,9 @@
 
                 // render the stage   
                 renderer.render(stage);
+                renderer2.render(stage2);
             }
+            
         }
 
     </script>
