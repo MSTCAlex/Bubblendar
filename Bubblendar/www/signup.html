@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-        <meta charset="utf-8" />
+    <meta charset="utf-8" />
 
     <!--
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
@@ -13,34 +13,42 @@
     <script src="scripts/platformOverrides.js"></script>
     <script src="scripts/parse-1.6.7.min.js"></script>
     <script src="scripts/sessionManager.js"></script>
-    <!--SessionManager (Debugging)-->
+    <script src="scripts/opTask.js"></script>
+    <script src="scripts/backBone.js"></script>
     <script>
-    </script>
-    <script>
-        function sendClicked()
-        {
-            if (signup_password.value != signup_confpassword.value)
-            {
+        function sendClicked() {            
+            if (signup_password.value != signup_confpassword.value) {
                 // TODO: Display warning
                 return;
-            }
-            // TODO: Data validation (Guidelines needed)
-            signup({
+            }            
+            // TODO: Data validation (Guidelines needed)    
+            var sutask = new opTask(0, 0, sufinished);            
+            sutask.userinfo = {
                 nickname: signup_dispname.value,
                 username: signup_username.value,
                 password: signup_password.value,
                 email: signup_email.value,
-            })
-        }
+            };
+            HandleBaseTask(sutask);
+            function sufinished(success) {
+                if (success) {
+
+                }
+                else {
+                    // TODO: Error handling
+                    sutask.errors;
+                }
+            };
+        };
     </script>
 </head>
 <body>
     <div>
         <label>Nickname:</label><input type="text" id="signup_dispname" /><br />
-        <label>Username:</label><input type="text" id="signup_username"/><br />
-        <label>Email:</label><input type="email" id="signup_email"/><br />
-        <label>Password:</label><input type="password" id="signup_password"/><br />
-        <label>Confirm Password:</label><input type="password" id="signup_confpassword"/><br />
+        <label>Username:</label><input type="text" id="signup_username" /><br />
+        <label>Email:</label><input type="email" id="signup_email" /><br />
+        <label>Password:</label><input type="password" id="signup_password" /><br />
+        <label>Confirm Password:</label><input type="password" id="signup_confpassword" /><br />
         <button onclick="sendClicked()">Send</button>
     </div>
 </body>

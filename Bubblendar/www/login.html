@@ -9,11 +9,15 @@
     -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
     <title>Login</title>
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
     <script src="scripts/parse-1.6.7.min.js"></script>
-    <script src="scripts/SessionManager.js"></script>
+    <script src="scripts/sessionManager.js"></script>
+    <script src="scripts/opTask.js"></script>
+    <script src="scripts/backBone.js"></script>
     <script>
-        function loginClicked() {
-            login(login_username.value, login_password.value);            
+        function loginClicked() {            
+            // Login operation code is 1          
         };
 
         function signupClicked()
