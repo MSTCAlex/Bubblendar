@@ -39,4 +39,9 @@ Updates:
 - self: errors
 - self.obj: id,timestamp ,,,(everything is synced)
 Note: If no timestamp is present, object will be pulled from cloud. Otherwise, newer versoin overwrites.
+====================================================================================
+22  Delete Object (Async)
+Requires: obj{className,id}
+Updates: 
+- self: errors
 */

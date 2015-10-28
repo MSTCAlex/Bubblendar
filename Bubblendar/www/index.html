@@ -26,13 +26,15 @@
         function onLoad() {        
             startSession(); // Init sessionManager
             document.addEventListener("deviceready", onDeviceReady, true);
+            /* Update user info example (2)
             var utask = new opTask(2, 2, onfin);
             userinfo.test = [1, 2, 3];
             HandleBaseTask(utask);
             function onfin(success) {
                 var t = success;
-            };
-            /* Save object to cloud example
+            };*/
+
+            /* Save object to cloud example (21)
             var testobj = { className: "TestObject", test: { 1: "dif", name: "difsomething" } };
             testobj.id = "spyJKK2Hz1"; // Retrieve by id, will create new if left undefined
             var stask = new opTask(21, 21, onfin);
@@ -53,6 +55,24 @@
                 }
             }
             */
+            /* Delete object example (22)
+            var testobj = { className: "TestObject", test: { 1: "dif", name: "difsomething" } };
+            testobj.id = "spyJKK2Hz1";
+
+            var dtask = new opTask(22, 22, onfin);
+            dtask.obj = testobj;
+            HandleBaseTask(dtask);
+            function onfin(succes)
+            {
+                if(success)
+                {
+                    var deleted = success;
+                }
+                else
+                {
+                    dtask.errors;
+                }
+            }*/
         }
 
         function onDeviceReady() {

@@ -6,6 +6,46 @@
         login(optask.userinfo, onfin);
     else if (type == 2) // Update userinfo
         pushuserinfo(onfin);
+    else if (type == 22) // Delete object
+    {
+        if (!Parse.User.current()) {
+            onfin("Cannot sync. User is not logged in."); return;
+        }
+        if (!optask.obj) {
+            onfin("<obj> was not provided."); return;
+        }
+        if (!optask.obj.className) {
+            onfin("<className> was not provided."); return;
+        }
+        if (!optask.obj.id) {
+            onfin("<obj.id> was not provided."); return;
+        }
+        var parseclass = Parse.Object.extend(optask.obj.className);
+        var parseobj;
+        var query = new Parse.Query(parseclass);
+        query.get(optask.obj.id, {
+            success: suc,
+            error: errf
+        });
+        function suc(obj) {
+            parseobj = obj;
+            cont();
+        }
+        function errf(obj, error) {
+            onfin(error); return;
+        }
+        function cont() {
+            if (!parseobj) { onfin("Could not delete object. Something went wrong."); return; }
+            parseobj.destroy({
+                success: function (obj) {
+                    onfin(false);
+                },
+                error: function (obj, error) {
+                    onfin(error);
+                }
+            });
+        }
+    }
     else if (type == 21) // Sync object request
     {
         if (!Parse.User.current()) {
