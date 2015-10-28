@@ -19,6 +19,88 @@
         function onLoad() {
             startSession(); // Init sessionManager
         };
+        
+         function validateUser (suTask)
+        {
+             var allValid=false;
+             nicknameE=suTask.userInfo.nickname;nicknameE.style.borderColor=ctrlColors.valid;
+             usernameE= suTask.userInfo.username; usernameE.style.borderColor=ctrlColors.valid;
+             emailE=suTask.userInfo.email; emailE.style.borderColor=ctrlColors.valid;
+             passwordE=suTask.userInfo.password; passwordE.style.borderColor=ctrlColors.valid;
+             confPasswordE=suTask.userInfo.confPass; confPasswordE.style.borderColor=ctrlColors.valid;
+
+            var isNNameVa=validateEntries.isNiNameV("Nick Name",nicknameE,5,12); //min,max length
+            var isUNameVa=validateEntries.isUsrNameV(usernameE,7,15);
+            var isEmVa=validateEntries.isEmailV(emailE);
+            var isPassVa=validateEntries.isPassV(passwordE);
+            var isConPassVa=validateEntries.isPassConf(passwordE,confPasswordE);
+            if(isNNameVa && isUNameVa && isEmVa && isPassVa && isConPassVa) allValid=true;
+            return allValid;
+           }
+
+        function handleUnvControl (unValidControl,strErrorMsg)
+        {
+            unValidControl.focus();
+            unValidControl.style.borderColor=ctrlColors.invalid;
+            alert(strErrorMsg); //whatever error style will appear
+        }
+        var regexHelpers ={
+            allAlphabets : /^[A-Za-z]+$/ ,
+            numeric: /\d+/g,
+            email: /\S+@\S+\.\S+/, //bla@bla.blah
+            password:/^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/ , //more than 8 char, at least 1 aplha, 1 number
+        };
+
+        var ctrlColors ={ //whatever colors
+            valid: "white",
+            invalid: "red"
+        };
+
+        var validateEntries= {
+            flag:false,
+            isNiNameV : function (type,nickName,minLength, maxLength)
+            {
+                 if(this.isEmpty(nickName)) handleUnvControl(nickName,type +" cannot be empty");                                      
+                else if(nickName.value.length< minLength  || nickName.value.length>maxLength)
+                handleUnvControl(nickName,type+" must be between " + minLength+ "and " + maxLength);
+                else return true;
+            },
+            isUsrNameV: function (userName,minLength,maxLength)
+            {
+
+                if(this.isNiNameV("User Name",userName,minLength,maxLength))
+                if(userName.value.match(regexHelpers.numeric)) handleUnvControl(userName,"User Name must be alphabetics only");
+                else return true;
+            },
+            isEmailV : function (email)
+            {
+                if(this.isEmpty(email)) handleUnvControl(email,"Email cannot be empty");
+                else if(!email.value.match(regexHelpers.email)) handleUnvControl(email,"Please Enter Valid Email");
+                else return true;
+            },
+            isPassV: function(password)
+            {
+                if(this.isEmpty(password)) handleUnvControl(password,"Password cannot be empty");
+                else if (!password.value.match(regexHelpers.password))
+                    handleUnvControl(password,"Password must be more than 8 chars with at least 1 alpha and 1 number");
+                else {this.flag=true; return true}
+            },
+            isPassConf : function (password1,password2)
+            {
+                if(this.flag)
+                {
+                    if(password1.value !=password2.value) handleUnvControl(password2,"Passwords must be equal");
+                    else return true;
+                }
+            },
+            isEmpty : function(entry)
+            {
+                if(entry.value=="") return true;
+                else return false;
+            },
+        };
+
+
         function sendClicked() {            
             if (signup_password.value != signup_confpassword.value) {
                 // TODO: Display warning
@@ -27,11 +109,15 @@
             // TODO: Data validation (Guidelines needed)    
             var sutask = new opTask(0, 0, sufinished);            
             sutask.userinfo = {
-                nickname: signup_dispname.value,
-                username: signup_username.value,
-                password: signup_password.value,
-                email: signup_email.value,
+                nickname: document.getElementById("signup_dispname"),
+               username: document.getElementById("signup_username"),
+               password: document.getElementById("signup_password") ,
+               confPass: document.getElementById("signup_confpassword"),
+               email:document.getElementById("signup_email"),
             };
+            
+            var checkValidate= validateUser(suTask);
+            if(checkValidate) //proceed
             HandleBaseTask(sutask);
             function sufinished(success) {
                 if (success) {
