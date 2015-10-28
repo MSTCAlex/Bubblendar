@@ -4,6 +4,8 @@
         signup(optask.userinfo, onfin);
     else if (type == 1) // Login request
         login(optask.userinfo, onfin);
+    else if (type == 2) // Update userinfo
+        pushuserinfo(onfin);
     else if (type == 21) // Sync object request
     {
         if (!Parse.User.current()) {

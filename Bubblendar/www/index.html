@@ -18,6 +18,7 @@
     <script src="scripts/platformOverrides.js"></script>
     <script src="scripts/parse-1.6.7.min.js"></script>        
     <script src="scripts/sessionManager.js"></script>
+    <script src="scripts/sessionManager.js"></script>
     <script src="scripts/opTask.js"></script>
     <script src="scripts/backBone.js"></script>
     <script src="scripts/index.js"></script>
@@ -25,7 +26,13 @@
         function onLoad() {        
             startSession(); // Init sessionManager
             document.addEventListener("deviceready", onDeviceReady, true);
-
+            var utask = new opTask(2, 2, onfin);
+            userinfo.test = [1, 2, 3];
+            HandleBaseTask(utask);
+            function onfin(success) {
+                var t = success;
+            };
+            /* Save object to cloud example
             var testobj = { className: "TestObject", test: { 1: "dif", name: "difsomething" } };
             testobj.id = "spyJKK2Hz1"; // Retrieve by id, will create new if left undefined
             var stask = new opTask(21, 21, onfin);
@@ -45,6 +52,7 @@
                     stask.errors; // \n separated errors
                 }
             }
+            */
         }
 
         function onDeviceReady() {
