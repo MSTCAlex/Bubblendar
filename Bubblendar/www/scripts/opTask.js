@@ -1,10 +1,13 @@
 ﻿// The idea of OpTask is to minimize unnecessary and redundant data copying from one class to another in the same process
-function opTask(ftype, btype, onfinished) {
+// The point of having btype and onpartfinished is to avoid having to temporarily store the type and onfinished when going through 2 stages of data processing
+function opTask(ftype, btype, onfinished, onpartfinished) {
     this.ftype = ftype;// ftype is the operation type passed by gui    
     this.btype = btype;// btype is the type passed to backend
     this.onfinished = onfinished;
+    this.onpartfin = onpartfinished;
     this.errors = "";
     // When btype is not set, backend code will fallback to ftype
+    // When onpartfin is not set, backend code will call onfinished
 };
 
 /* Operation Type List and standards
