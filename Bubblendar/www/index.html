@@ -24,7 +24,27 @@
     <script>
         function onLoad() {        
             startSession(); // Init sessionManager
-            document.addEventListener("deviceready", onDeviceReady, true);            
+            document.addEventListener("deviceready", onDeviceReady, true);
+
+            var testobj = { className: "TestObject", test: { 1: "dif", name: "difsomething" } };
+            testobj.id = "spyJKK2Hz1"; // Retrieve by id, will create new if left undefined
+            var stask = new opTask(21, 21, onfin);
+            stask.obj = testobj;
+            stask.obj.timestamp = new Date(); // To force overwrite (Push) set time to now
+            HandleBaseTask(stask);
+            function onfin(success)
+            {
+                if(success)
+                {
+                    // obj.timestamp has been automatically updated at this point
+                    // obj.id has been also updated (when creating new)
+                    var test = stask.obj;
+                }
+                else
+                {
+                    stask.errors; // \n separated errors
+                }
+            }
         }
 
         function onDeviceReady() {

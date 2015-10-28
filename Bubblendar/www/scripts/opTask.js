@@ -26,4 +26,17 @@ Requires: userinfo{username,password}
 Updates:
 - self: errors
 - sessionManager: userinfo,islogged
+===================================================================================
+2  Update User Info (Async)
+Requires: userinfo{anything to update/add (username/password are ignored)}
+Updates: 
+- sessionManager: userinfo
+- self: errors, objid (if new object)
+===================================================================================
+21  Sync Object (Async)
+Requires: obj{className,id(falsy = create new),timestamp,,,,}
+Updates: 
+- self: errors
+- self.obj: id,timestamp ,,,(everything is synced)
+Notes: If no timestamp is present, object will be pulled from cloud. Otherwise, newer versoin overwrites.
 */
